@@ -365,6 +365,17 @@ int setMountDirPath( const char *mount )
 	}
 
 	mount_dir.path		= realpath( mount, NULL );
+
+	if (!mount_dir.path) {
+		if (errno == ENOTCONN) {
+			printf("You may already mounted %s directory.\n", mount);
+			printf("Try \"fusermount -u %s\" command and then revoke Twitter Filesystem!\n", mount);
+			return(-1);
+		}
+		printf("unknown error occured. at %s\n", __FUNCTION__);
+		return(-1);
+	}
+
 	mount_dir.length	= strlen( mount_dir.path );
 
 	return( 0 );
