@@ -368,7 +368,7 @@ int setMountDirPath( const char *mount )
 
 	if (!mount_dir.path) {
 		if (errno == ENOTCONN) {
-			printf("You may already mounted %s directory.\n", mount);
+			printf("You may already mount %s directory.\n", mount);
 			printf("Try \"fusermount -u %s\" command and then revoke Twitter Filesystem!\n", mount);
 			return(-1);
 		}
