@@ -2971,7 +2971,8 @@ recvTokenAndSecret( struct ssl_session *session,
 		while( ( index + key_len ) < length )
 		{
 			logMessage( "%c", buffer[ index + key_len ] );
-			if( buffer[ index + key_len ] == '\r' ||
+			if( buffer[ index + key_len ] == '&'  ||
+				buffer[ index + key_len ] == '\r' ||
 				buffer[ index + key_len ] == '\n' ||
 				buffer[ index + key_len ] == '\0' )
 			{
