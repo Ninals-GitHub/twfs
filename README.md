@@ -8,7 +8,7 @@ Refer to the [Twitter Filesystem](http://softwaretechnique.jp/DownLoad/twfs_en.h
 
 ## Development Environment for twfs
 To compile the twfs, you may install clang, fuse and openssl development libraries.
-The following installation descriptions are assumed Ubuntu.
+The following installation descriptions are assumed under Ubuntu.
 
 ### Install clang development environment
 Execute the following command on your termianl.
