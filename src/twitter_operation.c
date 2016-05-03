@@ -244,6 +244,9 @@ int writeTwapiConfigurations( const char *id,
 	fprintf( file_p, "%s\n", access_token );
 	fprintf( file_p, "%s\n", access_secret );
 #endif
+
+	memset( file_contents, 0x00, sizeof( file_contents ) );
+
 	fc_length = 0;
 	fc_length = snprintf( &file_contents[ fc_length ],
 						  sizeof( file_contents ),
@@ -257,10 +260,13 @@ int writeTwapiConfigurations( const char *id,
 	fc_length += snprintf( &file_contents[ fc_length ],
 						   sizeof( file_contents ) - fc_length + 1,
 						   "%s\n", access_secret );
+	fc_length++;
 	memset( enc_file_contents, 0x00, sizeof( enc_file_contents ) );
 	encryptMessage3Des( ( const unsigned char* )file_contents,
 						fc_length,
 						( unsigned char* )enc_file_contents );
+
+	memset( file_contents, 0x00, sizeof( file_contents ) );
 
 	encodeBase64( enc_file_contents, fc_length, file_contents );
 
@@ -418,6 +424,7 @@ int readTwapiConfigurations( char *id, int id_len,
 	closeFile( fd );
 
 	result = decodeBase64( enc_f_contents, result );
+	memset( enc_f_contents + result, 0x00, sizeof( enc_f_contents ) - result + 1);
 	memset( f_contents, 0x00, sizeof( f_contents ) );
 	decryptMessage3Des( ( const unsigned char* )enc_f_contents,
 						result,
